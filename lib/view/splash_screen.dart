@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:news_app/resourses/resourses.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import 'home_screen.dart';
 
@@ -17,7 +16,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     Timer(const Duration(seconds: 2), () {
-      Navigator.push(
+      Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => const HomeScreen()));
     });
 
@@ -37,9 +36,7 @@ class _SplashScreenState extends State<SplashScreen> {
             fit: BoxFit.cover,
             height: height * 0.4,
           ),
-          SpinKitWave(
-            color: R.appColors.red,
-          )
+          R.appSpinKits.spinKitWave,
         ],
       ),
     );

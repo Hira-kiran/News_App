@@ -5,4 +5,5 @@ class AppColors {
   Color purple = Colors.purple;
   Color grey = Colors.grey;
   Color red = Colors.red;
+  Color white = Colors.white;
 }
