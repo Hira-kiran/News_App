@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:news_app/models/news_channel_headline_model.dart';
@@ -122,7 +123,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     width: width * 0.8,
                                     child: ClipRRect(
                                       borderRadius: BorderRadius.circular(20),
-                                      /*     child: CachedNetworkImage(
+                                      child: CachedNetworkImage(
                                         imageUrl: snapshot
                                             .data!.articles![index].urlToImage
                                             .toString(),
@@ -134,7 +135,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           Icons.error_outline,
                                           color: R.appColors.red,
                                         ),
-                                      ), */
+                                      ),
                                     ),
                                   ),
                                   Positioned(
@@ -209,7 +210,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 }),
           ),
           Padding(
-            padding:  EdgeInsets.symmetric(horizontal: width*0.04),
+            padding: EdgeInsets.symmetric(horizontal: width * 0.04),
             child: FutureBuilder<NewsCategoriesModel>(
                 future: newsViewModel.newsCatagoriesAPi("general"),
                 builder: (BuildContext cotext, snapshot) {
@@ -235,10 +236,21 @@ class _HomeScreenState extends State<HomeScreen> {
                                   height: height * 0.2,
                                   width: width * 0.3,
                                   child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(20),
-                                      child: Container(
-                                        color: R.appColors.blackColor,
-                                      )),
+                                    borderRadius: BorderRadius.circular(20),
+                                    child: CachedNetworkImage(
+                                      imageUrl: snapshot
+                                          .data!.articles![index].urlToImage
+                                          .toString(),
+                                      fit: BoxFit.cover,
+                                      placeholder: (context, url) =>
+                                          R.appSpinKits.spinKitFadingCube,
+                                      errorWidget: (context, url, error) =>
+                                          Icon(
+                                        Icons.error_outline,
+                                        color: R.appColors.red,
+                                      ),
+                                    ),
+                                  ),
                                 ),
                                 SizedBox(
                                   width: width * 0.02,
@@ -255,7 +267,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                         SizedBox(
                                           width: width * 0.5,
                                           child: Text(
-                                            snapshot.data!.articles![index].title
+                                            snapshot
+                                                .data!.articles![index].title
                                                 .toString(),
                                             maxLines: 3,
                                             overflow: TextOverflow.ellipsis,
